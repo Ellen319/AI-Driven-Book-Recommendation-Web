@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+header {
+    background-color:black;
+    color: white;
+    padding: 10px 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    margin: 0;
+}
+
+.auth a {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.centered-container {
+    text-align: center;
+}
+
+form textarea {
+    width: 100%;
+    max-width: 600px; /* Set a maximum width */
+    height: 200px; /* Increased height for a bigger text box */
+    padding: 10px;
+    border: 2px solid #000; /* Border around the text box */
+    border-radius: 5px;
+    margin-top: 20px;
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+}
+
+form button {
+    display: block;
+    margin: 20px auto 0; /* Centers the button and adds margin at the top */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #555;
+}
+
+.about-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    text-align: center;
+}
+
+.about-container h2 {
+    margin-bottom: 20px;
+}
+
+.about-container p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
