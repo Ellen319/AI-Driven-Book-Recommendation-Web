@@ -3,18 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Results - BookSense</title>
+    <title>BookSense - Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     {% extends "base.html" %}
     {% block content %}
     <main>
-        <div class="results-container">
-            <h2>Aha, found it!</h2>
-            <!-- Results will be displayed here -->
+        <div class="centered-container">
+            <h1>User Input Analysis Results</h1>
+            <h2><strong>Keywords:</strong></h2>
+            <ul>
+                {% for keyword in keywords.split(', ') %}
+                    <li>{{ keyword }}</li>
+                {% endfor %}
+            </ul>
+            <h2><strong>Summary:</strong></h2>
+            <p>{{ summary }}</p>
+
+            <h2>Top 10 Book Recommendations:</h2>
+            <div class="product-card-grid">
+                {% for book in books %}
+                    <div class="product-card">
+                        <figure>
+                            <img src="{{ book.coverImg }}" alt="Book Image">
+                        </figure>
+                        <header>
+                            <a href="/book/{{ book.bookId }}" class="stretched-link">{{ book.title }}</a>
+                            <div class="author-rating">
+                                <a href="#" class="author-link">{{ book.author }}</a>
+                                <div class="rating">
+                                    <span class="icon icon-solid-star"></span> {{ book.rating }}
+                                    <a href="/book/{{ book.bookId }}" class="details-link">View Details</a>
+                                </div>
+                            </div>
+                        </header>
+                        <footer>
+                            <a href="https://www.goodreads.com/book/show/{{ book.bookId }}" class="check-goodreads" target="_blank" rel="noopener noreferrer">Check on Goodreads</a>
+                        </footer>
+                    </div>
+                {% endfor %}
+            </div>
+            <a href="/">Go Back</a>
         </div>
     </main>
-    {% endblock %}
+    {% endblock %} 
 </body>
 </html>
