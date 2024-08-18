@@ -13,28 +13,29 @@
                 <h1>BookSense</h1>
             </div>
             <div class="auth">
-                <a href="/about">About Us</a> | <a href="/login">Login</a> | <a href="/signup">Sign Up</a>
+                <a href="/about">About Us</a> <a href="/login">Login</a> <a href="/signup">Sign Up</a>
             </div>
         </div>
     </header>
     <main>
         <div class="centered-container">
             <h2>What's on your mind?</h2>
-            <form id="searchForm" action="{{ url_for('search') }}" method="POST">
+            <form id="searchForm" action="{{ url_for('extract') }}" method="post">
                 <textarea id="userInput" name="user_input" placeholder="Share your thoughts..."></textarea>
-                <button type="submit" style="display: none;">Lets Explore</button>
+                <button type="submit" id="submitButton" style="display: none;">Let's Explore</button>
             </form>
-            <div id="loadingScreen" style="display: none;">
-                Finding for you...
-            </div>
         </div>
     </main>
 
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 BookSense by <a href="https://www.linkedin.com/in/ellenzhang826/" target="_blank">EZ</a></p>
+        </div>
+    </footer>
     <script>
-        const textarea = document.querySelector('textarea');
-        const button = document.querySelector('button');
+        const textarea = document.querySelector('#userInput');
+        const button = document.querySelector('#submitButton');
         const form = document.getElementById('searchForm');
-        const loadingScreen = document.getElementById('loadingScreen');
 
         textarea.addEventListener('input', () => {
             if (textarea.value.trim() !== '') {
@@ -44,12 +45,23 @@
             }
         });
 
-        form.addEventListener('submit', () => {
-            loadingScreen.style.display = 'block';
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+            const formData = new FormData(form);
+
+            // Provide instant feedback
+            window.location.href = '{{ url_for("loading") }}';
+
+            // Submit form data
+            fetch('{{ url_for("extract") }}', {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                if (!response.ok) {
+                    console.error('Failed to submit form');
+                }
+            });
         });
     </script>
-
-
 </body>
 </html>
-
