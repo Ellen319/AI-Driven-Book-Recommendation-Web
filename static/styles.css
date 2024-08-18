@@ -1,14 +1,18 @@
 body {
-    font-family: Arial, sans-serif;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    background-color: #ffffff; 
+    color: #333;
 }
 
+
 header {
-    background-color:black;
+    background-color: #333;
     color: white;
-    padding: 10px 0;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .container {
@@ -21,15 +25,33 @@ header {
 
 .logo h1 {
     margin: 0;
+    font-size: 1.8rem;
 }
 
 .auth a {
+    display: inline-block;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
     color: white;
     text-decoration: none;
-    margin-left: 10px;
+    background-color: #444;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.auth a:hover {
+    background-color: #555;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 main {
+    flex: 1;
+    flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,37 +64,69 @@ main {
 
 form textarea {
     width: 100%;
-    max-width: 600px; /* Set a maximum width */
-    height: 200px; /* Increased height for a bigger text box */
-    padding: 10px;
-    border: 2px solid #000; /* Border around the text box */
+    height: 150px;
+    padding: 15px;
+    border: 1px solid #ddd;
     border-radius: 5px;
     margin-top: 20px;
-    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+    box-sizing: border-box;
+    font-size: 1rem;
 }
 
 form button {
     display: block;
-    margin: 20px auto 0; /* Centers the button and adds margin at the top */
+    margin: 20px auto 0;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #333;
+    background-color: #007bff;
     color: white;
+    font-size: 1rem;
     cursor: pointer;
 }
 
 form button:hover {
-    background-color: #555;
+    background-color: #0056b3;
 }
 
-.about-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    background-color: #fff; /* Make sure background color matches the main page */
     text-align: center;
+}
+
+.loading-container img {
+    width: 200px; /* Adjust as needed */
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.loading-container p {
+    font-size: 1.2rem;
+    color: rgb(37, 94, 227);
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+footer a {
+    color: white;
 }
 
 .about-container h2 {
@@ -82,4 +136,344 @@ form button:hover {
 .about-container p {
     margin-bottom: 10px;
     line-height: 1.6;
+}
+
+/* New CSS for Book Cards */
+.product-card-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columns */
+    gap: 38px 20px; /* Increased vertical gap (first value) and horizontal gap (second value) */
+    margin: 20px 40px; /* Add margins to the left and right */
+}
+
+.product-card {
+    background-color: #fff; /* White background for cards */
+    border: 1px solid black;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-right: 4px solid black; /* Bold black left border */
+    border-bottom: 4px solid black; /* Bold black bottom border */
+}
+
+.product-card figure {
+    margin: 0;
+    height: 200px; /* Adjust height as needed */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff; /* Ensure the image section has a white background */
+}
+
+.product-card figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.product-card header {
+    padding: 16px;
+    flex-grow: 1;
+    background-color: #fff; /* Ensure the header section has a white background */
+}
+
+.product-card .stretched-link {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.product-card .author-rating {
+    margin-top: 8px;
+}
+
+.product-card .author-link {
+    color: #000; /* Black color for author's name */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.product-card .author-link:hover {
+    text-decoration: underline;
+}
+
+.product-card .rating {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    color: #000; /* Black color for rating text */
+}
+
+.product-card .icon {
+    color: gold;
+}
+
+.icon-solid-star {
+    width: 20px; /* Smaller size */
+    height: 20px; /* Smaller size */
+    display: inline-block;
+    background-color: gold; /* Star color */
+    -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyLjAyNCAyLjQ0MWMtLjU3MSAwLTEuMTU0LjM1NS0xLjUgMS4wNjJMOC40MDEgNy44NzZsLTQuODQyLjY4N2MtMS41NTYuMjE3LTIuMDYgMS43NDQtLjkzNyAyLjg0MmwzLjQ5OSAzLjQwNS0uODEyIDQuNzhjLS4yNjggMS41NDYgMS4wMTUgMi40ODEgMi40MDUgMS43NDguNTM2LS4yODQgMy4yOTYtMS43MTQgNC4zMS0yLjI0OWw0LjMxIDIuMjVjMS4zOS43MzIgMi42NzgtLjIwMiAyLjQwNS0xLjc1bC0uODQzLTQuNzc5IDMuNDk4LTMuNDA1YzEuMTMtMS4wOTQuNjUxLTIuNjItLjkwNi0yLjg0MmwtNC44NzItLjY4Ny0yLjA5My00LjM3M2MtLjM0NS0uNzA3LS45MjgtMS4wNjEtMS41LTEuMDYyWiIgZmlsbD0iIzAwMCIvPjwvc3ZnPg==);
+    mask-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyLjAyNCAyLjQ0MWMtLjU3MSAwLTEuMTU0LjM1NS0xLjUgMS4wNjJMOC40MDEgNy44NzZsLTQuODQyLjY4N2MtMS41NTYuMjE3LTIuMDYgMS43NDQtLjkzNyAyLjg0MmwzLjQ5OSAzLjQwNS0uODEyIDQuNzhjLS4yNjggMS41NDYgMS4wMTUgMi40ODEgMi40MDUgMS43NDguNTM2LS4yODQgMy4yOTYtMS43MTQgNC4zMS0yLjI0OWw0LjMxIDIuMjVjMS4zOS43MzIgMi42NzgtLjIwMiAyLjQwNS0xLjc1bC0uODQzLTQuNzc5IDMuNDk4LTMuNDA1YzEuMTMtMS4wOTQuNjUxLTIuNjItLjkwNi0yLjg0MmwtNC44NzItLjY4Ny0yLjA5My00LjM3M2MtLjM0NS0uNzA3LS45MjgtMS4wNjEtMS41LTEuMDYyWiIgZmlsbD0iIzAwMCIvPjwvc3ZnPg==);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    vertical-align: middle; /* Align icon with text */
+    margin-right: 5px; /* Space between star and rating */
+}
+
+
+.product-card footer {
+    padding: 16px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* Ensure the footer section has a white background */
+}
+
+.product-card .check-goodreads {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #87CEFA; /* Light blue background */
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.product-card .check-goodreads:hover {
+    background-color: #4682B4; /* Slightly darker blue on hover */
+}
+
+/* Style the unordered list */
+ul {
+    list-style-type: disc; /* Display dots */
+    list-style-position: inside; /* Position dots inside the list items */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center the list items */
+}
+
+/* Style the list items */
+li {
+    padding-left: 20px; /* Space between the dot and the text */
+    margin: 10px 0; /* Space around each list item, vertical spacing only */
+    line-height: 2; /* Increase line height for more spacing */
+}
+
+
+/* New styles for sign-up page */
+.signup-container {
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    max-width: 1200px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    padding: 0;
+    margin: 0px auto; /* Adjust margin as needed */
+}
+
+.signup-form {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.signup-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form input {
+    margin-bottom: 25px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.signup-form button {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signup-form button:hover {
+    background-color: #0056b3;
+}
+
+.signup-form p {
+    margin-top: 10px;
+}
+
+.signup-form a {
+    color: black;
+    text-decoration: none;
+}
+
+
+.signup-header {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: space-between; /* Space between items */
+    margin-bottom: 20px; /* Space below header */
+}
+
+.booksense-title {
+    margin: 0;
+    font-size: 24px;
+}
+
+.signup-login-link {
+    color: black;
+    text-decoration: underline; /* Always show underline */
+    font-size: 20px;
+}
+
+.signup-text {
+    font-size: 20px;
+    margin-bottom: 40px; /* Increased space below "Sign up with us" text */
+}
+
+.forgot-password-link {
+    margin-left: 10px; /* Space between input and link */
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-template-rows: repeat(3, 1fr); 
+    gap: 3px;
+    flex: 1;
+    height: 100%;
+    box-sizing: border-box; /* Include padding in width/height */
+    margin: 0;
+    padding: 0;
+}
+
+.book-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px; 
+}
+
+/* Styling for flash messages */
+.flash-messages {
+    margin: 20px;
+}
+
+.alert {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+
+.book-details-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin: 30% auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.book-grid-right {
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    overflow: hidden; /* Ensure no overflow */
+}
+
+.book-grid-right img {
+    width: auto; /* Allow width to adjust while maintaining aspect ratio */
+    height: auto; /* Ensure image covers the height of the container */
+    max-width: 100%; /* Ensure image doesn't exceed container width */
+    object-fit: cover; /* Ensure image covers the container */
+}
+
+.book-details {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1.5px solid black;
+}
+
+.book-title {
+    font-size: 28px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid black;
+}
+
+.book-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid black;
+}
+
+.book-author {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.book-rating {
+    font-size: 20px;
+    font-weight: normal;
+    color: #ff9900;
+}
+
+.book-description {
+    line-height: 1.6;
+    margin-top: 20px; /* Adjust margin for spacing */
+    padding-top: 10px;
 }
