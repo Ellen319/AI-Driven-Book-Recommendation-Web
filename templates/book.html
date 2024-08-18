@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="product-card-grid">
+        {% for book in books.itertuples() %}
+        <article class="product-card">
+            <figure>
+                <img src="{{ book.coverImg }}" alt="Book Image">
+            </figure>
+            <header>
+                <a href="#" class="stretched-link"> <!-- to turn to book details page -->
+                    <h4 itemprop="name">{{ book.title }}</h4>
+                </a>
+                <div class="author-rating">
+                    <a href="#" class="author-link">{{ book.author }}</a>
+                    <div class="rating" aria-label="Rating">
+                        <span class="icon icon-solid-star">★</span>
+                        <span class="rating-average">{{ book.rating }}</span>
+                    </div>
+                </div>
+            </header>
+            <footer>
+                <a href="https://www.goodreads.com/book/show/{{ book.bookId }}" class="check-goodreads" target="_blank" rel="noopener noreferrer">
+                    Check on Goodreads
+                </a>
+            </footer>
+        </article>
+        {% endfor %}
+    </div>
+</body>
+</html>
