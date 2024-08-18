@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+
     <header>
         <div class="container">
             <div class="logo">
@@ -15,12 +16,21 @@
             <div class="auth">
                 <a href="{{ url_for('home') }}">Home</a>
                 <a href="/">Login</a>
-                <a href="/">Sign Up</a>
+                <a href="/signup">Sign Up</a>
             </div>
         </div>
     </header>
 
-    {% block content %}
-    {% endblock %}
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 BookSense by <a href="https://www.linkedin.com/in/ellenzhang826/" target="_blank">EZ</a></p>
+        </div>
+    </footer>
+
 </body>
 </html>
