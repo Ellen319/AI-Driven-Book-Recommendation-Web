@@ -37,11 +37,10 @@
         <aside class="book-grid">
             {% for book_image, book_id in book_images %}
                 <a href="{{ url_for('book_details', book_id=book_id) }}">
-                    <img src="{{ book_image }}" alt="Book Image">
+                    <img src="{% if book_image == '' %}{{ url_for('static', filename='img/cover_coming_soon.png') }}{% else %}{{ book_image }}{% endif %}" alt="Book Image">
                 </a>
             {% endfor %}
         </aside>
-        
     </div>
 </body>
 </html>
