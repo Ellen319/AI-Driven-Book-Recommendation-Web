@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>{{ session['username'] }}'s Wishlist</h1>
+    {% if wishlist_books %}
+        <div class="wishlist-grid">
+            {% for book in wishlist_books %}
+            <div class="wishlist-card">
+                <a href="{{ url_for('book_details', book_id=book[2]) }}">
+                    <img src="{{ book[4] }}" alt="Book Cover">
+                </a>
+                    <div class="book-title">{{ book[3] }}</div>
+                    <form action="{{ url_for('remove_from_wishlist', book_id=book[2], redirect_page='dashboard') }}" method="post">
+                        <button type="submit" class="remove-button">Remove from Wishlist</button>
+                    </form>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-wishlist">
+            <p>Your wishlist is currently empty.</p>
+            <p>Start exploring and add books to your wishlist!</p>
+        </div>
+    {% endif %}
+    <a href="/" class="search-again-button">Search Books</a>    
+</body>
+</html>
+{% endblock %}
