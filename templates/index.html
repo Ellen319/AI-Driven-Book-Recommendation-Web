@@ -13,7 +13,19 @@
                 <h1>BookSense</h1>
             </div>
             <div class="auth">
-                <a href="/about">About Us</a> <a href="/login">Login</a> <a href="/signup">Sign Up</a>
+                <a href="{{ url_for('about') }}">About Us</a>
+                {% if session.get('user_id') %}
+                    <div class="dropdown">
+                        <a href="{{ url_for('dashboard') }}" class="dropbtn">Hi, {{ session['username'] }}!</a> 
+                        <div class="dropdown-content">
+                            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                            <a href="{{ url_for('profile') }}">User Profile</a>
+                            <a href="{{ url_for('logout') }}">Logout</a>
+                        </div>
+                    </div>
+                {% else %}
+                <a href="/login">Login</a> <a href="/signup">Sign Up</a>
+                {% endif %}
             </div>
         </div>
     </header>
@@ -22,7 +34,11 @@
             <h2>What's on your mind?</h2>
             <form id="searchForm" action="{{ url_for('extract') }}" method="post">
                 <textarea id="userInput" name="user_input" placeholder="Share your thoughts..."></textarea>
-                <button type="submit" id="submitButton" style="display: none;">Let's Explore</button>
+                <div class="button-group">
+                    <button type="button" id="surpriseMeButton">Surprise Me!</button>
+                    <button type="submit" id="submitButton">Let's Explore!</button>
+                </div>
+                <p id="errorMessage" style="color: red; display: none;">Don't be shy! Share a little bit, and we'll do the rest</p>
             </form>
         </div>
     </main>
@@ -32,36 +48,84 @@
             <p>&copy; 2024 BookSense by <a href="https://www.linkedin.com/in/ellenzhang826/" target="_blank">EZ</a></p>
         </div>
     </footer>
-    <script>
-        const textarea = document.querySelector('#userInput');
-        const button = document.querySelector('#submitButton');
-        const form = document.getElementById('searchForm');
 
-        textarea.addEventListener('input', () => {
-            if (textarea.value.trim() !== '') {
-                button.style.display = 'block';
+
+    <!-- Buy Me a Coffee widget -->
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" 
+    data-id="simulabo5a" data-description="Support me on Buy me a coffee!" 
+    data-message="Like the site? Support with a coffee and keep the creativity flowing!" 
+    data-color="#5F7FFF" data-position="Right" data-x_margin="28" data-y_margin="50"></script>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const textarea = document.querySelector('#userInput');
+        const surpriseButton = document.querySelector('#surpriseMeButton');
+        const submitButton = document.querySelector('#submitButton');
+        const form = document.getElementById('searchForm');
+        const errorMessage = document.getElementById('errorMessage');
+        
+        // Array of surprise sentences
+        const surpriseSentences = [
+        "I'm looking for a book that makes me think deeply about life's big questions, offering insights that challenge my current perspectives and leave me reflecting long after I finish reading.",
+        "I want a story that not only takes me on an unexpected journey but also immerses me in rich, vivid details, where every twist and turn keeps me engaged and eager for more.",
+        "Recommend me a book that explores human relationships in depth, diving into the complexities of emotions, conflicts, and connections that define who we are and how we relate to one another.",
+        "Surprise me with a mystery that I won't be able to put down, one that grabs my attention from the first page and keeps me on the edge of my seat until the very last, with shocking revelations and intricate plot twists.",
+        "I'm in the mood for a thrilling adventure set in a fantasy world full of wonder, where magical creatures roam, epic battles are fought, and the hero's journey is filled with danger and discovery at every turn.",
+        "Give me a book with a strong, complex protagonist whose journey of growth, struggle, and triumph captivates my imagination and makes me deeply invested in their fate from start to finish.",
+        "I'd love a heartwarming story about friendship and love, where the bonds between characters are tested and strengthened, bringing out themes of loyalty, compassion, and the enduring power of human connection.",
+        "How about a book that challenges societal norms, one that questions the status quo and offers thought-provoking commentary on issues like justice, equality, and the impact of cultural expectations on individual identity?",
+        "I want to read something inspirational and uplifting, a book that fills me with hope and optimism, reminding me of the strength of the human spirit and the endless possibilities for growth and positive change.",
+        "I'm interested in a historical fiction with a gripping plot, where real-world events are intertwined with the personal stories of characters whose lives are forever changed by the unfolding drama of history.",
+        "I'm feeling introspective and want to explore deep, thought-provoking ideas, delving into the nature of existence, the meaning of life, and the philosophical questions that challenge us to reflect on our place in the universe.",
+        "Surprise me with something that takes me on a journey to the unexpected, where every chapter reveals new wonders, and the story weaves a tapestry of intrigue, mystery, and the thrill of the unknown.",
+        "I'm in the mood to dive into the intricacies of human relationships, where love, betrayal, forgiveness, and understanding are explored through complex characters and emotionally charged narratives.",
+        "Give me something mysterious that I won't be able to stop thinking about, a story with enigmatic characters, puzzling events, and an air of suspense that lingers long after the final page.",
+        "Take me on a thrilling adventure set in a world full of wonder, where danger and excitement are balanced by moments of quiet beauty and where the journey is as important as the destination.",
+        "I'm looking for a story with a strong and unforgettable lead character, someone whose actions, thoughts, and struggles resonate with me on a personal level and whose growth leaves a lasting impression.",
+        "I'm craving a heartwarming tale about friendship and connection, one that shows the beauty of human bonds in the face of adversity, where loyalty and love prevail even in the toughest of times.",
+        "Show me something that challenges the way we see the world, a book that provokes new ways of thinking about society, culture, and the fundamental beliefs that shape our interactions and our lives.",
+        "I'm searching for an uplifting experience that inspires positivity, a story that demonstrates how even in the darkest of times, hope, kindness, and the resilience of the human spirit can shine through.",
+        "Take me back in time with a gripping narrative full of historical intrigue, where real events provide the backdrop for a compelling story of courage, betrayal, and the fight for survival."
+        ];
+    
+    
+    
+        // Handle Surprise Me button click
+        surpriseButton.addEventListener('click', () => {
+            const randomSentence = surpriseSentences[Math.floor(Math.random() * surpriseSentences.length)];
+            textarea.value = randomSentence;
+            submitButton.style.display = 'block';
+        });
+    
+        form.addEventListener('submit', (event) => {
+            if (textarea.value.trim() === '') {
+                event.preventDefault();
+                errorMessage.style.display = 'block';
             } else {
-                button.style.display = 'none';
+                errorMessage.style.display = 'none';
+                event.preventDefault();  // Prevent the default form submission
+    
+                // Redirect to loading page immediately
+                window.location.href = '{{ url_for("loading") }}';
+
+                // Create FormData object
+                const formData = new FormData(form);
+                // Submit form data using fetch
+                fetch('{{ url_for("extract") }}', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => {
+                    if (!response.ok) {
+                        console.error('Failed to submit form');
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                });
             }
         });
-
-        form.addEventListener('submit', (event) => {
-            event.preventDefault(); // Prevent default form submission
-            const formData = new FormData(form);
-
-            // Provide instant feedback
-            window.location.href = '{{ url_for("loading") }}';
-
-            // Submit form data
-            fetch('{{ url_for("extract") }}', {
-                method: 'POST',
-                body: formData
-            }).then(response => {
-                if (!response.ok) {
-                    console.error('Failed to submit form');
-                }
-            });
-        });
+    });
     </script>
+    
 </body>
 </html>
