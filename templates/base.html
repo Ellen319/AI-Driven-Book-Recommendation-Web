@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookSense</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>BookSense</title>
 </head>
 <body>
 
@@ -14,9 +14,27 @@
                 <h1>BookSense</h1>
             </div>
             <div class="auth">
-                <a href="{{ url_for('home') }}">Home</a>
-                <a href="/">Login</a>
-                <a href="/signup">Sign Up</a>
+
+            <!-- Show Home and About for everyone -->
+            <a href="{{ url_for('home') }}">Home</a>
+
+            {% if request.endpoint != 'about' %}
+                <a href="{{ url_for('about') }}">About Us</a>
+            {% endif %}
+
+            {% if session.get('user_id') %}
+                <div class="dropdown">
+                    <a href="{{ url_for('dashboard') }}" class="dropbtn">Hi, {{ session['username'] }}!</a> 
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                        <a href="{{ url_for('profile') }}">User Profile</a>
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('signup') }}">Sign Up</a>
+            {% endif %}
             </div>
         </div>
     </header>
@@ -31,6 +49,27 @@
             <p>&copy; 2024 BookSense by <a href="https://www.linkedin.com/in/ellenzhang826/" target="_blank">EZ</a></p>
         </div>
     </footer>
+
+    <!-- Buy Me a Coffee widget -->
+    <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" 
+    data-id="simulabo5a" data-description="Support me on Buy me a coffee!" 
+    data-message="Like the site? Support with a coffee and keep the creativity flowing!" 
+    data-color="#5F7FFF" data-position="Right" data-x_margin="28" data-y_margin="50"></script>
+
+    <script>
+        // Optional: Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 
 </body>
 </html>
