@@ -24,9 +24,9 @@
                 <a href="/" class="booksense-title">
                     <h1>BookSense</h1>
                 </a>
-                <a href="/signup" class="signup-login-link" style="text-decoration: underline;">Sign up</a>
+                <a href="/signup" class="signup-login-link" style="text-decoration: underline;">Create an Account</a>
             </div>
-            <p class="signup-text">Log in</p>
+            <p class="signup-text">Log in to explore more</p>
             <form action="{{ url_for('login') }}" method="post">
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required>
@@ -35,8 +35,10 @@
             </form>
         </div>
         <aside class="book-grid">
-            {% for book_image in book_images %}
-                <img src="{{ book_image }}" alt="Book Image">
+            {% for book_image, book_id in book_images %}
+                <a href="{{ url_for('book_details', book_id=book_id) }}">
+                    <img src="{% if book_image == '' %}{{ url_for('static', filename='img/cover_coming_soon.png') }}{% else %}{{ book_image }}{% endif %}" alt="Book Image">
+                </a>
             {% endfor %}
         </aside>
     </div>
