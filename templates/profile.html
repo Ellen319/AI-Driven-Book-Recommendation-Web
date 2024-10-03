@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="card profile-container">
+        <div class="banner">
+            <form id="profile-image-form" method="POST" enctype="multipart/form-data" action="{{ url_for('profile') }}">
+                <input type="file" id="profile-image-upload" name="profile_image" accept="image/*" style="display: none;">
+                <img src="{{ url_for('static', filename='uploads/' + (user[2] if user[2] else 'default.jpg')) }}" alt="Profile Image" class="profile-image" />
+            </form>
+        </div>
+        
+        <h2 class="name">{{ user[0] }}</h2>
+        <form method="POST" action="{{ url_for('profile') }}">
+            <div class="user-info">
+                <p><strong>Email:  </strong> <input type="email" name="email" value="{{ user[1] }}" required></p>
+                <p><strong>Username:  </strong> <input type="text" name="username" value="{{ user[0] }}" required></p>
+                <button type="submit" class="edit-btn">Update Profile</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Handle the image click to trigger the file input
+        document.querySelector('.profile-image').addEventListener('click', function() {
+            document.getElementById('profile-image-upload').click();
+        });
+
+        // Handle the change event for the file input
+        document.getElementById('profile-image-upload').addEventListener('change', function() {
+            // Submit the form when a file is selected
+            document.getElementById('profile-image-form').submit();
+        });
+    </script>
+    
+</body>
+</html>
+{% endblock %}
