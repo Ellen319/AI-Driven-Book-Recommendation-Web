@@ -1,6 +1,8 @@
 body {
+    display: flex;
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
+    min-height: 100vh; 
     margin: 0;
     padding: 0;
     background-color: #ffffff; 
@@ -16,8 +18,9 @@ header {
 }
 
 .container {
-    width: 80%;
-    margin: 0 auto;
+    width: 85%;
+    max-width: 1200px; /* Optional: Limit the maximum width */
+    margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,7 +31,7 @@ header {
     font-size: 1.8rem;
 }
 
-.auth a {
+.auth a, .auth .welcome-message {
     display: inline-block;
     width: 120px;
     height: 40px;
@@ -43,7 +46,7 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.auth a:hover {
+.auth a:hover, .auth .welcome-message:hover {
     background-color: #555;
     transform: translateY(-3px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
@@ -60,11 +63,29 @@ main {
 
 .centered-container {
     text-align: center;
+    max-width: 1300px; /* Set a maximum width */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add some padding for better spacing */
 }
 
+.button-group {
+    display: flex;
+    gap: 18px; /* Space between the buttons */
+    justify-content: center; /* Center the buttons */
+    margin-top: 10px;
+    margin-bottom: 35px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
 form textarea {
-    width: 100%;
+    width: 600px;
+    max-width: 800px;       
     height: 150px;
+    max-height: 300px;   
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -110,14 +131,19 @@ form button:hover {
     color: rgb(37, 94, 227);
 }
 
+
 footer {
     background-color: #333;
     color: white;
     padding: 20px 0;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center; /* Center align footer content */
+    width: 100%; /* Ensure the footer takes the full width */
+}
+
+footer .container {
+    display: flex; /* Set container inside footer as a flex container */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
 }
 
 footer p {
@@ -131,19 +157,23 @@ footer a {
 
 .about-container h2 {
     margin-bottom: 20px;
+    margin-left: 170px ;
 }
 
 .about-container p {
     margin-bottom: 10px;
-    line-height: 1.6;
+    margin-left: 170px ;
+    margin-right: 170px ;
+    line-height: 2;
 }
 
 /* New CSS for Book Cards */
 .product-card-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 columns */
-    gap: 38px 20px; /* Increased vertical gap (first value) and horizontal gap (second value) */
-    margin: 20px 40px; /* Add margins to the left and right */
+    grid-template-columns: repeat(3, 1fr); /* 3 fixed columns per row */
+    gap: 50px; /* Increased vertical gap (first value) and horizontal gap (second value) */
+    margin: 0 auto; /* Center the grid */
+    margin-bottom: 30px;
 }
 
 .product-card {
@@ -154,18 +184,20 @@ footer a {
     transition: box-shadow 0.3s;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    max-width: 240px; /* Limit card width */
 }
-
 
 .product-card:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-right: 4px solid black; /* Bold black left border */
+    border-right: 4px solid black; /* Bold black right border */
     border-bottom: 4px solid black; /* Bold black bottom border */
 }
 
 .product-card figure {
     margin: 0;
-    height: 200px; /* Adjust height as needed */
+    height: 66%; /* Full height of the card */
+    width: 100%; /* Full width of the card */
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -174,32 +206,41 @@ footer a {
 }
 
 .product-card figure img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Ensure the image covers the entire container */
+    width: 100%; /* Fill the width of the figure */
+    height: 100%; /* Fill the height of the figure */
+    object-fit: cover; /* Ensure the image scales down to fit within these dimensions without cropping */
 }
 
 .product-card header {
-    padding: 16px;
+    padding: 12px;
     flex-grow: 1;
+    box-sizing: border-box; 
     background-color: #fff; /* Ensure the header section has a white background */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
 }
 
 .product-card .stretched-link {
     color: #333;
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: bold;
+    margin-bottom: 10px; /* Space below the title */
+    display: block; /* Ensures the title takes up the full width */
+    line-height: 1.3; /* Improve readability by adjusting line height */
 }
 
 .product-card .author-rating {
-    margin-top: 8px;
+    display: flex;
+    gap: 6px; /* Space between name and rating */
 }
 
 .product-card .author-link {
     color: #000; /* Black color for author's name */
-    text-decoration: none;
-    font-weight: bold;
+    display: block; /* Ensures the element takes up the full width available */
+    text-align: left; /* Aligns the book title to the left */
+    text-decoration: none; /* Removes underline */
 }
 
 .product-card .author-link:hover {
@@ -209,17 +250,18 @@ footer a {
 .product-card .rating {
     display: flex;
     align-items: center;
-    margin-top: 8px;
+    gap: 5px;
     color: #000; /* Black color for rating text */
 }
 
 .product-card .icon {
     color: gold;
+    margin-right: 0;
 }
 
 .icon-solid-star {
-    width: 20px; /* Smaller size */
-    height: 20px; /* Smaller size */
+    width: 16px; /* Smaller size */
+    height: 16px; /* Smaller size */
     display: inline-block;
     background-color: gold; /* Star color */
     -webkit-mask-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyLjAyNCAyLjQ0MWMtLjU3MSAwLTEuMTU0LjM1NS0xLjUgMS4wNjJMOC40MDEgNy44NzZsLTQuODQyLjY4N2MtMS41NTYuMjE3LTIuMDYgMS43NDQtLjkzNyAyLjg0MmwzLjQ5OSAzLjQwNS0uODEyIDQuNzhjLS4yNjggMS41NDYgMS4wMTUgMi40ODEgMi40MDUgMS43NDguNTM2LS4yODQgMy4yOTYtMS43MTQgNC4zMS0yLjI0OWw0LjMxIDIuMjVjMS4zOS43MzIgMi42NzgtLjIwMiAyLjQwNS0xLjc1bC0uODQzLTQuNzc5IDMuNDk4LTMuNDA1YzEuMTMtMS4wOTQuNjUxLTIuNjItLjkwNi0yLjg0MmwtNC44NzItLjY4Ny0yLjA5My00LjM3M2MtLjM0NS0uNzA3LS45MjgtMS4wNjEtMS41LTEuMDYyWiIgZmlsbD0iIzAwMCIvPjwvc3ZnPg==);
@@ -232,30 +274,100 @@ footer a {
     margin-right: 5px; /* Space between star and rating */
 }
 
-
 .product-card footer {
-    padding: 16px;
+    padding: 10px;
     border-top: 1px solid #ddd;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between; /* Aligns content to the left and right */
+    text-align: center;
     background-color: #fff; /* Ensure the footer section has a white background */
+    align-items: center; /* Aligns items vertically in the center */
 }
 
-.product-card .check-goodreads {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #87CEFA; /* Light blue background */
-    color: #333;
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+.footer-content .rating {
+    flex: 1; /* Allows rating to take up space on the left */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align rating to the left */
+}
+
+.footer-content .separator {
+    width: 1px;
+    height: 20px;
+    background-color: #ddd; /* Light gray color for separator */
+    margin: 0 15px; /* Space around the separator */
+}
+
+.footer-content .a-link {
+    flex: 1; /* Allows "View Details" to take up space on the right */
+    align-items: center;
+    justify-content: flex-end; /* Align "View Details" to the right */
+}
+
+/* Style for "View Details" button */
+.product-card .details-link {
+    padding: 5px 8px;
+    font-size: 12px;
+    color: white;
+    background-color: #28a745; /* Dark background for contrast */
+    border: 2px solid transparent; /* Border for button */
+    border-radius: 25px; /* Rounded corners */
     text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
 }
 
-.product-card .check-goodreads:hover {
-    background-color: #4682B4; /* Slightly darker blue on hover */
+.product-card .details-link:hover {
+    background-color: #555; /* Slightly lighter background on hover */
+    color: #fff; /* Ensure text remains white on hover */
+    border-color: #fff; /* Border color changes on hover */
+    transform: translateY(-3px); /* Lift button on hover */
 }
+
+.product-card .details-link:active {
+    background-color: #444; /* Darker background when clicked */
+    border-color: #fff; /* Ensure border color remains */
+    transform: translateY(1px); /* Slightly depress button on click */
+}
+
+
+/* Style for the Search Again button */
+.search-again-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #007bff; /* Modern blue background */ 
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 50px; /* Move it down from other elements */
+    margin-bottom: 30px;
+}
+
+.search-again-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-3px); /* Slightly lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* More pronounced shadow on hover */
+}
+
+.search-again-button:active {
+    transform: translateY(1px); /* Slightly depress on click */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow return to normal on click */
+}
+
+
 
 /* Style the unordered list */
 ul {
@@ -415,41 +527,55 @@ li {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 30px;
-    margin: 30% auto;
-    padding: 20px;
+    margin: 30 auto;
+    padding: 10px;
     background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    width: 80%; /* Set a specific width for the container */
+    max-width: 1500px; /* Optional: Max width for larger screens */
+    /* Set a fixed height for the container */
+    height: 460px; 
 }
 
 .book-grid-right {
-    display: flex;
+    display: flex; /* Use flexbox for centering */
     justify-content: center; /* Center the image horizontally */
     align-items: center; /* Center the image vertically */
+    height: 100%; /* Make sure the container takes full height of the parent */
     overflow: hidden; /* Ensure no overflow */
 }
 
 .book-grid-right img {
     width: auto; /* Allow width to adjust while maintaining aspect ratio */
-    height: auto; /* Ensure image covers the height of the container */
+    height: 100%; /* Ensure image covers the height of the container */
     max-width: 100%; /* Ensure image doesn't exceed container width */
     object-fit: cover; /* Ensure image covers the container */
+    border-radius: 10px;
 }
 
 .book-details {
     display: grid;
     grid-template-rows: auto auto 1fr;
-    gap: 20px;
+    gap: 15px;
     padding: 20px;
     border-radius: 8px;
     border: 1.5px solid black;
+    /* Set a fixed height and enable scrolling for description */
+    height: 91%; /* Make sure it fills the height of the container */
+    overflow: hidden; /* Hide overflow */   
+}
+
+.book-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid black;
 }
 
 .book-title {
     font-size: 28px;
     font-weight: bold;
     padding-bottom: 10px;
-    border-bottom: 1.5px solid black;
 }
 
 .book-meta {
@@ -462,7 +588,7 @@ li {
 }
 
 .book-author {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: normal;
 }
 
@@ -474,6 +600,338 @@ li {
 
 .book-description {
     line-height: 1.6;
-    margin-top: 20px; /* Adjust margin for spacing */
+    margin-top: 10px; /* Adjust margin for spacing */
     padding-top: 10px;
+    max-height: 200px;
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+
+
+/* Success (green) */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #c3e6cb;
+}
+
+/* Danger (red) */
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #f5c6cb;
+}
+
+
+/* Add to your styles.css file */
+.book-actions {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Adjust spacing between buttons */
+}
+
+.wishlist-form {
+    margin: 0; /* Reset any default margin */
+    display: inline;
+    float:right; /* Float the wishlist form to the right */
+}
+
+.check-goodreads, .add-to-wishlist {
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.check-goodreads {
+    background-color: #219be7;
+}
+
+.check-goodreads:hover {
+    background-color: #358decdc; /* Slightly darker blue on hover */
+}
+
+.add-to-wishlist {
+    background-color: #28a745; /* Green color for Wishlist button */
+}
+
+.add-to-wishlist:hover {
+    background-color: #17d149c7; /* Slightly darker blue on hover */
+}
+
+/* Wishlist */
+.wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.wishlist-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wishlist-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.wishlist-card img {
+    width: 150px;
+    height: auto 100%;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+
+.book-title {
+    font-size: 25px;
+    font-weight: 600;
+    color: #333;
+}
+
+.remove-button {
+    background-color: rgb(183, 243, 155);
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.remove-button:hover {
+    background-color: #c0392b;
+}
+
+.no-wishlist {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+    margin-top: 50px;
+}
+
+.search-again-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.search-again-button:hover {
+    background-color: #0056b3;
+}
+
+
+.error-container {
+    text-align: center;
+    margin-top: 50px;
+    padding: 10px;
+}
+
+.error-code {
+    font-size: 6rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    font-size: 1.5rem;
+    margin-bottom: 50px;
+}
+
+.back-home {
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.back-home:hover {
+    background-color: #0056b3;
+}
+
+
+/* General Styles for Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    background:#444;
+    color: white;
+    padding: 0.5px 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dropbtn:hover {
+    background: linear-gradient(145deg, #5569e8, #007bff);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Dropdown Content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(32, 192, 224, 0.825);
+    border-radius: 8px;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Dropdown Links */
+.dropdown-content a {   
+    padding: 10px 10px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #e8e8e8;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+/* Show dropdown content on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+    opacity: 1;
+}
+
+
+/* New CSS for Profile Page */
+.card {
+    background-color: white;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0px 1rem 1.5rem rgba(0, 0, 0, 0.5);
+}
+
+.profile-container {
+    width: 400px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.banner {
+    position: relative;
+    background-image: url(https://img.freepik.com/premium-photo/tabby-cat-reading-book-library-with-other-students_587895-5617.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 11rem;
+    cursor: pointer;
+}
+
+.profile-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid white;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.banner:hover .profile-image {
+    transform: scale(1.1);
+}
+
+.name {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+
+.user-info {
+    max-width: 250px; /* Limit the width of the user info container */
+    margin: 10px auto; /* Center the container */
+    padding: 20px; 
+    background-color: transparent;
+
+}
+
+.user-info p {
+    margin-bottom: 15px; /* Space between inputs */
+}
+
+.user-info strong {
+    display: block; /* Make label block-level */
+    margin-bottom: 10px; /* Space between label and input */
+    color: #333; /* Dark text color */
+}
+
+.user-info input[type="email"],
+.user-info input[type="text"] {
+    width: 100%;
+    padding: 10px; /* Padding inside inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Larger font */
+    transition: border-color 0.3s; /* Smooth border color transition */
+}
+
+.user-info input[type="email"]:focus,
+.user-info input[type="text"]:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+
+.edit-btn {
+    display: block;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 5px 15px;
+    background-color: #1c9eff;
+    color: white;
+    border-radius: 0.8rem;
+    text-decoration: none;
+    transition: background-color 100ms ease-in-out;
+}
+
+.edit-btn:hover {
+    background-color: #007ad6;
 }
