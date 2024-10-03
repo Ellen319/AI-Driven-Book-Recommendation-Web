@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,21 +9,60 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    {% extends "base.html" %}
-    {% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
     <div class="book-details-container">
         <aside class="book-grid-right">
-            <img src="{{ book['coverImg'] }}" alt="Book Image">
+            <img src="{% if book['coverImg'] == '' %}{{ url_for('static', filename='img/cover_coming_soon.png') }}{% else %}{{ book['coverImg'] }}{% endif %}" alt="Book Image">
         </aside>
         <div class="book-details">
-            <div class="book-title">{{ book['title'] }}</div>
-            <div class="book-meta">
-                <div class="book-author">{{ book['author'] }}</div>
-                <div class="book-rating">Rating: {{ book['rating'] }} ★ </div>
+            <div class="book-title-container">
+                <div class="book-title">{{ book['title'] }}</div>
+                <a href="https://www.goodreads.com/book/show/{{ book.bookId }}" class="check-goodreads" target="_blank" rel="noopener noreferrer">Check on Goodreads</a>
             </div>
-            <div class="book-description">{{ book['description'] }}</div>
+            <div class="book-meta">
+                <div class="book-author">
+                    {% set clean_author = book['author'].split(' (Goodreads Author)')[0] %}
+                    {{ clean_author }}
+                </div>
+                <div class="book-genres">
+                    <strong>Genres:</strong> 
+                    {{ book['genres']|replace("'", "")|replace("[", "")|replace("]", "") }}
+                </div>
+            </div>
+            <div class="book-description">
+                {% if book['description'] is none or (book['description'] is float and book['description'] != book['description']) %}
+                <p>It seems we don't have a description for this book right now.</p>
+                <p>However, you can find more information and reviews on<a href="https://www.goodreads.com/book/show/{{ book['bookId'] }}" target="_blank"> Goodreads</a>.</p>
+                {% else %}
+                    {{ book['description'] }}
+                {% endif %}
+            </div>
+            <div class="book-actions">
+                {% if in_wishlist %}
+                <form action="{{ url_for('remove_from_wishlist', book_id=book.bookId, redirect_page='book_details') }}" method="post" class="wishlist-form">
+                    <button type="submit" class="add-to-wishlist" style="background-color: red;">Remove from Wishlist</button>
+                </form>
+                {% else %}
+                <form action="{{ url_for('add_to_wishlist', book_id=book.bookId) }}" method="POST" class="wishlist-form">
+                    <input type="hidden" name="title" value="{{ book.title }}">
+                    <input type="hidden" name="coverImg" value="{{ book.coverImg }}">
+                    <button type="submit" class="add-to-wishlist">Add to Wishlist</button>
+                </form>
+                {% endif %}
+            </div>
         </div>
     </div>
-    {% endblock %}
+
+ 
+
 </body>
 </html>
+{% endblock %}
