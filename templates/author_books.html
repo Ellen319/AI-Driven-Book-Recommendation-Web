@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books by {{ author }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+    <main>
+        <div class="centered-container">
+            <h1>Books by {{ author }}</h1>
+
+            {% if books %}
+                <div class="product-card-grid">
+                    {% for book in books %}
+                        <div class="product-card">
+                            <figure>
+                                <img src="{{ book.coverImg }}" alt="Book Image">
+                            </figure>
+                            <header>
+                                <a href="/book/{{ book.bookId }}" class="stretched-link">{{ book.title }}</a>
+                                <div class="author-rating">
+                                    {% set clean_author = book.author.split(' (Goodreads Author)')[0] %}
+                                    <a class="author-link">{{ clean_author }}</a>
+                                </div>
+                            </header>
+                            <footer>
+                                <div class="footer-content">
+                                    <div class="rating" aria-label="Rating">
+                                        <span class="icon icon-solid-star"></span>
+                                        <span class="rating-average">{{ book.rating }}</span>
+                                    </div>
+                                    <div class="a-link">
+                                        <a href="/book/{{ book.bookId }}" class="details-link">View Details</a>
+                                    </div>
+                                </div>
+                            </footer>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No books found by this author.</p>
+            {% endif %}
+
+            <a href="/" class="search-again-button">Search Again</a>
+        </div>
+    </main>
+    {% endblock %}
+</body>
+</html>
