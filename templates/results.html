@@ -8,9 +8,8 @@
 </head>
 <body>
     {% extends "base.html" %}
-    {% block content %}
+    {% block content %}    
     <main>
-        <div class="centered-container">
             <h1>User Input Analysis Results</h1>
             <h2><strong>Keywords:</strong></h2>
             <ul>
@@ -21,32 +20,39 @@
             <h2><strong>Summary:</strong></h2>
             <p>{{ summary }}</p>
 
-            <h2>Top 10 Book Recommendations:</h2>
+            <div class="centered-container">
+            <h1>Top 10 Book Recommendations:</h1>
             <div class="product-card-grid">
                 {% for book in books %}
                     <div class="product-card">
                         <figure>
-                            <img src="{{ book.coverImg }}" alt="Book Image">
+                            <img src="{{ book.coverImg }}" alt="Book Image">                   
                         </figure>
                         <header>
                             <a href="/book/{{ book.bookId }}" class="stretched-link">{{ book.title }}</a>
                             <div class="author-rating">
-                                <a href="#" class="author-link">{{ book.author }}</a>
-                                <div class="rating">
-                                    <span class="icon icon-solid-star"></span> {{ book.rating }}
-                                    <a href="/book/{{ book.bookId }}" class="details-link">View Details</a>
-                                </div>
+                                {% set clean_author = book.author.split(' (Goodreads Author)')[0] %}
+                                <a href="{{ url_for('author_books', author_name=clean_author) }}" class="author-link">{{ clean_author }}</a>
                             </div>
                         </header>
                         <footer>
-                            <a href="https://www.goodreads.com/book/show/{{ book.bookId }}" class="check-goodreads" target="_blank" rel="noopener noreferrer">Check on Goodreads</a>
+                            <div class="footer-content">
+                                <div class="rating" aria-label="Rating">
+                                    <span class="icon icon-solid-star"></span>
+                                    <span class="rating-average">{{ book.rating }}</span>
+                                </div>
+                                <div class="a-link">
+                                    <a href="/book/{{ book.bookId }}" class="details-link">View Details</a>
+                                </div>
+                            </div>
                         </footer>
                     </div>
                 {% endfor %}
             </div>
-            <a href="/">Go Back</a>
+            
+            <a href="/" class="search-again-button">Search Again</a>
         </div>
     </main>
-    {% endblock %} 
+    {% endblock %}
 </body>
 </html>
