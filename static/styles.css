@@ -679,9 +679,12 @@ li {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
+    padding: 10px;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .wishlist-card:hover {
@@ -698,7 +701,7 @@ li {
 
 
 .book-title {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
     color: #333;
 }
@@ -710,7 +713,8 @@ li {
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
+    margin-bottom: 15px;
 }
 
 .remove-button:hover {
@@ -761,7 +765,7 @@ li {
 .back-home {
     text-decoration: none;
     padding: 10px 20px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     background-color: #007bff;
     color: white;
     border-radius: 5px;
@@ -934,4 +938,33 @@ li {
 
 .edit-btn:hover {
     background-color: #007ad6;
+}
+
+
+/* Style the input fields for forgot/reset password */
+.form-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto; /* Center the form */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+/* Change border color on focus */
+.input-field:focus {
+    border-color: #007BFF;
+    outline: none;
 }
