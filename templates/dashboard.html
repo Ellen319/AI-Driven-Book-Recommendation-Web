@@ -8,6 +8,17 @@
     <title>Dashboard</title>
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
     <h1>{{ session['username'] }}'s Wishlist</h1>
     {% if wishlist_books %}
         <div class="wishlist-grid">
@@ -29,7 +40,24 @@
             <p>Start exploring and add books to your wishlist!</p>
         </div>
     {% endif %}
-    <a href="/" class="search-again-button">Search Books</a>    
+    <a href="/" class="search-again-button">Search Books</a>
+    
+    <script>
+        // Automatically fade out flash messages after 3 seconds
+        setTimeout(function() {
+            const flashes = document.querySelectorAll('.alert');  // Target Bootstrap alerts
+            flashes.forEach(function(flash) {
+                flash.style.transition = 'opacity 0.3s ease';  // Apply smooth transition
+                flash.style.opacity = '0';  // Fade out
+    
+                setTimeout(() => {
+                    flash.remove();  // Completely remove after fading out
+                }, 300);  // Wait for the transition to complete before removing
+            });
+        }, 3000);  // Message stays for 3 seconds
+    </script>
+
+    
 </body>
 </html>
 {% endblock %}
