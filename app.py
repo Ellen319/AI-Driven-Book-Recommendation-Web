@@ -132,7 +132,7 @@ def create_app():
         model = T5ForConditionalGeneration.from_pretrained(model_name)
         tokenizer = T5Tokenizer.from_pretrained(model_name)
         input_ids = tokenizer.encode("summarize: " + text[:512], return_tensors="pt", max_length=512, truncation=True)
-        summary_ids = model.generate(input_ids, max_length=100, min_length=5, length_penalty=2.0, num_beams=4, early_stopping=True)
+        summary_ids = model.generate(input_ids, max_length=60, min_length=5, length_penalty=2.0, num_beams=3, early_stopping=True)
         summary = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
         return summary
 
