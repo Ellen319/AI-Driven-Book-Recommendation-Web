@@ -10,16 +10,6 @@
     {% extends "base.html" %}
     {% block content %}    
     <main>
-            <h1>User Input Analysis Results</h1>
-            <h2><strong>Keywords:</strong></h2>
-            <ul>
-                {% for keyword in keywords.split(', ') %}
-                    <li>{{ keyword }}</li>
-                {% endfor %}
-            </ul>
-            <h2><strong>Summary:</strong></h2>
-            <p>{{ summary }}</p>
-
             <div class="centered-container">
             <h1>Top 10 Book Recommendations:</h1>
             <div class="product-card-grid">
