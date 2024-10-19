@@ -573,9 +573,10 @@ li {
 }
 
 .book-title {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: bold;
     padding-bottom: 10px;
+    max-width: 66%; 
 }
 
 .book-meta {
@@ -700,10 +701,12 @@ li {
 }
 
 
-.book-title {
-    font-size: 20px;
+.book-title2 {
+    font-size: 16px;
     font-weight: 600;
     color: #333;
+    text-align: center; /* Center the text */
+    margin: 0 auto; /* Center the block within its parent */
 }
 
 .remove-button {
