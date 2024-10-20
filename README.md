@@ -1,4 +1,4 @@
-# AI-Driven Book Recommendation Web Application
+# BookSense — Personalized Book Discovery
 
 ## Overview
 
@@ -70,5 +70,7 @@ Readers often struggle to find books that match their specific preferences or mo
 **Get Recommendations:** The search engine processes the input using NLP models to generate a list of recommended books tailored to each user's tastes.
 
 **Add to Wishlist:** Save books to the wishlist for later reference.
+
+![App Screenshot](./static/img/home_page.png)
 
 ---
