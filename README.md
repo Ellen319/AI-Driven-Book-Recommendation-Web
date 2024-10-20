@@ -4,6 +4,8 @@
 
 The **BookSense — Books That Know You** is an intelligent web-based application that delivers personalized book recommendations based on user inputs. This project integrates AI-driven natural language processing (NLP) models to provide an enhanced recommendation experience for readers, beyond traditional approaches.
 
+![App Screenshot](./static/img/home_page.png)
+
 **Key Features:**
 - **User-Friendly Interface:** Easy-to-navigate front-end for seamless interaction.
 - **Secure User Authentication:** Safe Robust registration and login functionality to protect user data.
@@ -71,6 +73,5 @@ Readers often struggle to find books that match their specific preferences or mo
 
 **Add to Wishlist:** Save books to the wishlist for later reference.
 
-![App Screenshot](./static/img/home_page.png)
 
 ---
